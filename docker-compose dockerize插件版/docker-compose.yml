@@ -1,0 +1,69 @@
+version: '2'
+services: 
+  
+    # 自定义服务名
+    spring-cloud-eureka:
+        # 总起重启
+        restart: always
+        # 别名
+        container_name: spring-cloud-eureka
+        # 编译DockerFile所在路径
+        build: spring-cloud-eureka
+        # 端口映射
+        ports:
+          - 8081:8081
+
+         
+    spring-cloud-config: 
+        restart: always
+        container_name: spring-cloud-config
+        build: spring-cloud-config
+        ports:
+          - 8888:8888       
+
+       
+    spring-cloud-service: 
+        restart: always
+        container_name: spring-cloud-service
+        build: spring-cloud-service
+        ports:
+          - 8082:8082             
+        
+          
+    spring-cloud-feign: 
+        restart: always
+        container_name: spring-cloud-feign
+        build: spring-cloud-feign
+        ports:
+          - 8083:8083   
+        
+        
+
+    spring-cloud-gateway: 
+        restart: always
+        container_name: spring-cloud-gateway
+        build: spring-cloud-gateway
+        ports:
+          - 8085:8085   
+          
+        
+         
+    spring-cloud-zipkin: 
+        restart: always
+        container_name: spring-cloud-zipkin
+        build: spring-cloud-zipkin
+        ports:
+          - 8084:8084  
+       
+        
+          
+   
+
+    spring-cloud-admin: 
+        restart: always
+        container_name: spring-cloud-admin
+        build: spring-cloud-admin
+        ports:
+          - 8087:8087   
+        
+          
