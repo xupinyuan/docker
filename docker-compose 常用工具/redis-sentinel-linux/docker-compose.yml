@@ -1,0 +1,51 @@
+version: '2'
+services:
+  master:
+    image: redis:4.0
+    restart: always
+    container_name: redis-master
+    network_mode: "host"
+    command: redis-server --port 16379  
+   
+  slave1:
+    image: redis:4.0
+    restart: always
+    container_name: redis-slave-1
+    network_mode: "host"
+    command: redis-server --port 16380 --slaveof 119.3.252.69 16379
+   
+  slave2:
+    image: redis:4.0
+    restart: always
+    container_name: redis-slave-2
+    network_mode: "host"    
+    command: redis-server --port 16381 --slaveof 119.3.252.69 16379
+    
+  sentinel1:
+    image: redis:4.0
+    restart: always
+    container_name: redis-sentinel-1
+    network_mode: "host"    
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - ./sentinel/sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+   
+  sentinel2:
+    image: redis:4.0
+    restart: always
+    container_name: redis-sentinel-2
+    network_mode: "host"    
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - ./sentinel/sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+   
+  sentinel3:
+    image: redis:4.0
+    restart: always
+    container_name: redis-sentinel-3
+    network_mode: "host"    
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - ./sentinel/sentinel3.conf:/usr/local/etc/redis/sentinel.conf  
+    
+    
