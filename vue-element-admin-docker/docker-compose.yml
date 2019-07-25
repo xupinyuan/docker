@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+   # 自定义服务名
+    myvue:
+        # 总起重启
+        restart: always
+        # 别名
+        container_name: myvue
+        # 编译DockerFile所在路径
+        build: ./
+        # 端口映射
+        ports:
+          - 9527:9527
