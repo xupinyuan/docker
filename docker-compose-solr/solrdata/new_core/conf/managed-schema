@@ -1019,4 +1019,17 @@
         </analyzer>
      </fieldType>
 
+	 
+	 
+	 <field name="solr_id" type="text_ik" indexed="true" stored="true"/>
+	 <field name="solr_title"  type="text_ik" indexed="true" stored="true"/>
+	 <field name="solr_content"  type="text_ik" indexed="true" stored="true"/>
+	 <field name="solr_keyword" type="text_ik" indexed="true" stored="true" />
+	 
+	 # 复制域（Solr 的搜索优化功能，将多个字段域复制到一个域里，提高查询效率）
+	 <field name="solr_keywords" type="text_ik" indexed="true" stored="false" multiValued="true"/>
+	 <copyField source="solr_id" dest="solr_keywords"/>
+	 <copyField source="solr_title" dest="solr_keywords"/>
+	 <copyField source="solr_content" dest="solr_keywords"/>
+	 <copyField source="solr_keyword" dest="solr_keywords"/>
 </schema>
