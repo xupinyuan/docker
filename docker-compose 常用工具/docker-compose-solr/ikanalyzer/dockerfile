@@ -11,7 +11,8 @@ WORKDIR /opt/solr/server/solr-webapp/webapp/WEB-INF
 ADD ext.dic .
 ADD stopword.dic .
 ADD IKAnalyzer.cfg.xml .
-
+# 由于使用数据卷权限被调整为root 需要重新授权给solr
+RUN chown -R solr /var/solr/data
 
 user solr
 WORKDIR /opt/solr
