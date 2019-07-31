@@ -15,7 +15,5 @@ user solr
 WORKDIR /opt/solr
 
 # 由于使用数据卷，目录权限被调整为root ,因此在启动时
-ENTRYPOINT [ "chown", "-R", "solr","/var/solr/data"]
-ENTRYPOINT ["ls","-al"]
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["solr-foreground"]]
+CMD solr-foreground && chown -R solr /var/solr/data
