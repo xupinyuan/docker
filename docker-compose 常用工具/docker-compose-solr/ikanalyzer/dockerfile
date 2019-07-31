@@ -2,7 +2,6 @@ FROM solr
 user root
 
 
-
 # 安装中文分词
 WORKDIR /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 ADD ik-analyzer-solr5-5.x.jar .
@@ -11,8 +10,12 @@ WORKDIR /opt/solr/server/solr-webapp/webapp/WEB-INF
 ADD ext.dic .
 ADD stopword.dic .
 ADD IKAnalyzer.cfg.xml .
-# 由于使用数据卷权限被调整为root 需要重新授权给solr
-RUN chown -R solr /var/solr/data
 
 user solr
 WORKDIR /opt/solr
+
+# 由于使用数据卷，目录权限被调整为root ,因此在启动时
+ENTRYPOINT [ "chown", "-R", "solr","/var/solr/data"]
+ENTRYPOINT ["ls","-al"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["solr-foreground"]]
